@@ -3,6 +3,10 @@ import { type SourceItem } from '../../../types';
 import { safeQuerySelector } from '../../../utils/helpers';
 
 class Sources {
+  constructor() {
+    this.initMenuToggle();
+  }
+
   public draw(data: SourceItem[]): void {
     const fragment: DocumentFragment = document.createDocumentFragment();
     const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
@@ -26,6 +30,19 @@ class Sources {
 
     safeQuerySelector(document, '.sources').append(fragment);
     this.addSearch();
+  }
+
+  private initMenuToggle(): void {
+    const menuToggle = document.querySelector<HTMLElement>('.menu__toggle');
+    const menu = document.querySelector<HTMLElement>('.menu');
+
+    if (!menuToggle || !menu) {
+      return;
+    }
+
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
   }
 
   private addSearch(): void {
