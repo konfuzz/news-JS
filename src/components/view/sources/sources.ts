@@ -30,6 +30,7 @@ class Sources {
 
     safeQuerySelector(document, '.sources').append(fragment);
     this.addSearch();
+    this.addMobileMenuAutoClose();
   }
 
   private initMenuToggle(): void {
@@ -42,6 +43,27 @@ class Sources {
 
     menuToggle.addEventListener('click', () => {
       menu.classList.toggle('active');
+    });
+  }
+
+  private addMobileMenuAutoClose(): void {
+    const sources = document.querySelector<HTMLDivElement>('.sources');
+    const menu = document.querySelector<HTMLElement>('.menu');
+
+    if (!sources || !menu) {
+      return;
+    }
+
+    sources.addEventListener('click', (event: Event) => {
+      const target = event.target;
+
+      if (!target || !(target instanceof HTMLElement) || !target.closest('.source__item')) {
+        return;
+      }
+
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        menu.classList.remove('active');
+      }
     });
   }
 
