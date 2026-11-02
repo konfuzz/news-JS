@@ -9,10 +9,12 @@ class Loader {
     this.options = options;
   }
 
-  protected getResp(
+  protected getResp<T extends ArticlesList | SourcesList>(
     { endpoint, options = {} }: { endpoint: string; options?: Options },
-    callback = (): void => {
-      console.error('No callback for GET response');
+    callback = (data: T): void => {
+      if (!data) {
+        console.error('No callback for GET response');
+      }
     },
   ): void {
     this.load('GET', endpoint, callback, options);
@@ -40,16 +42,16 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  private load(
+  private load<T>(
     method: string,
     endpoint: string,
-    callback: (data: ArticlesList | SourcesList) => void,
+    callback: (data: T) => void,
     options: Options = {},
   ): void {
     fetch(this.makeUrl(options, endpoint), { method })
       .then((res) => this.errorHandler(res))
       .then((res) => res.json())
-      .then((data: ArticlesList | SourcesList) => callback(data))
+      .then((data: T) => callback(data))
       .catch((err) => console.error(err));
   }
 }
