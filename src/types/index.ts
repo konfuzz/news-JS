@@ -34,3 +34,5 @@ export interface ArticlesList {
   totalResults: number;
   articles: Article[];
 }
+
+export type Options = Record<string, string>;
