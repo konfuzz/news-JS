@@ -1,4 +1,4 @@
-import { type Options, type ReqOptions, type ArticlesList, type SourcesList, type HttpMethod } from '../../types';
+import { type Options, type ReqOptions, type ArticlesList, type SourcesList, type HttpMethod, type Endpoints } from '../../types';
 
 class Loader {
   public baseLink: string;
@@ -10,7 +10,7 @@ class Loader {
   }
 
   protected getResp<T extends ArticlesList | SourcesList>(
-    { endpoint, options = {} }: { endpoint: string; options?: Options },
+    { endpoint, options = {} }: { endpoint: Endpoints; options?: Options },
     callback = (data: T): void => {
       if (!data) {
         console.error('No callback for GET response');
@@ -31,7 +31,7 @@ class Loader {
     return res;
   }
 
-  private makeUrl(options: Options, endpoint: string): string {
+  private makeUrl(options: Options, endpoint: Endpoints): string {
     const urlOptions: Options = { ...this.options, ...options };
     let url = `${this.baseLink}${endpoint}?`;
 
@@ -44,7 +44,7 @@ class Loader {
 
   private load<T>(
     method: HttpMethod,
-    endpoint: string,
+    endpoint: Endpoints,
     callback: (data: T) => void,
     options: Options = {},
   ): void {

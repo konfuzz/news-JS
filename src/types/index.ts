@@ -35,6 +35,11 @@ export interface ArticlesList {
   articles: Article[];
 }
 
+export const enum Endpoints {
+  SOURCES = 'sources',
+  EVERYTHING = 'everything',
+}
+
 export type Options = Record<string, string>;
 export type ReqOptions = {
   apiKey: string;
