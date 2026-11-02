@@ -16,20 +16,23 @@ header h1 {
 footer {
   height: 100px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-footer .copyright {
   font-size: 14px;
   color: #333;
   text-align: center;
+  gap: 5px;
 }
-footer .copyright a {
+footer a {
   color: #444;
 }
-footer .copyright a:hover {
+footer a:hover {
   color: #555;
 }
 footer .copyright:before {
   content: '©';
+}
+footer p {
+  margin: 0;
 }
