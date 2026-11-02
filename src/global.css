@@ -27,7 +27,7 @@ header h1 {
     max-width: 1160px;
     margin: 0 auto;
     padding: 0 10px;
-    position: sticky;
+    position: relative;
     top: 10px;
   }
 }
