@@ -25,6 +25,38 @@ class Sources {
     });
 
     safeQuerySelector(document, '.sources').append(fragment);
+    this.addSearch();
+  }
+
+  private addSearch(): void {
+    const searchInput = document.querySelector<HTMLInputElement>('search input');
+    const sources = document.querySelector<HTMLDivElement>('.sources');
+
+    if (!searchInput || !sources) {
+      return;
+    }
+
+    searchInput.addEventListener('input', (event: Event) => {
+      const target = event.target;
+
+      if (!target || !(target instanceof HTMLInputElement)) {
+        return;
+      }
+
+      const inputValue = target.value;
+
+      sources.querySelectorAll<HTMLElement>('.source__item').forEach((item: HTMLElement) => {
+        const itemName = item.querySelector<HTMLElement>('.source__item-name');
+
+        if (itemName) {
+          if (itemName.textContent?.toLowerCase().includes(inputValue.toLowerCase())) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        }
+      });
+    });
   }
 }
 

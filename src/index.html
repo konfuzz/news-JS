@@ -11,7 +11,15 @@
       <h1>News Portal</h1>
     </header>
     <main>
-      <div class="sources buttons"></div>
+      <div class="menu">
+        <div class="menu__toggle active" onclick="this.parentNode.classList.toggle('active')">
+          Sources <span>▼</span>
+        </div>
+        <div class="menu__dropdown">
+          <search><input type="text" placeholder="Search source" /></search>
+          <div class="sources buttons"></div>
+        </div>
+      </div>
       <div class="news"></div>
     </main>
     <footer>

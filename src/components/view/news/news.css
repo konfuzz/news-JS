@@ -1,6 +1,7 @@
 .news {
     text-align: center;
     width: 100%;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -16,6 +17,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;
+        z-index: -1;
     }
 }
 .news__item {
