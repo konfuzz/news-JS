@@ -43,7 +43,7 @@ class Loader {
   }
 
   private load<T>(
-    method: string,
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     endpoint: string,
     callback: (data: T) => void,
     options: Options = {},
