@@ -6,6 +6,17 @@
     gap: 20px;
     align-items: stretch;
     padding: 0 10px;
+    position: relative;
+
+    &:empty:before {
+        content: 'Please, select a source to see news';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+    }
 }
 .news__item {
     display: flex;
