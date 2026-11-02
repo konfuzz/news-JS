@@ -1,5 +1,6 @@
 import './sources.css';
 import { type SourceItem } from '../../../types';
+import { safeQuerySelector } from '../../../utils/helpers';
 
 class Sources {
   public draw(data: SourceItem[]): void {
@@ -17,25 +18,13 @@ class Sources {
         return;
       }
 
-      const nameElement = sourceClone.querySelector<HTMLElement>('.source__item-name');
-      const itemElement = sourceClone.querySelector<HTMLElement>('.source__item');
-
-      if (nameElement) {
-        nameElement.textContent = item.name;
-      }
-
-      if (itemElement) {
-        itemElement.setAttribute('data-source-id', item.id);
-      }
+      safeQuerySelector(sourceClone, '.source__item-name').textContent = item.name;
+      safeQuerySelector(sourceClone, '.source__item').setAttribute('data-source-id', item.id);
 
       fragment.append(sourceClone);
     });
 
-    const sourcesContainer = document.querySelector<HTMLElement>('.sources');
-
-    if (sourcesContainer) {
-      sourcesContainer.append(fragment);
-    }
+    safeQuerySelector(document, '.sources').append(fragment);
   }
 }
 
