@@ -11,28 +11,28 @@ class AppController extends AppLoader {
     }
 
     getNews(e, callback) {
-        let target = e.target;
         const newsContainer = e.currentTarget;
+        const sourceItem = e.target.closest('.source__item');
 
-        while (target !== newsContainer) {
-            if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
-                            },
-                        },
-                        callback
-                    );
-                }
-                return;
-            }
-            target = target.parentNode;
+        if (!sourceItem) {
+            return;
         }
+
+        const sourceId = sourceItem.getAttribute('data-source-id');
+
+        if (newsContainer.getAttribute('data-source') !== sourceId) {
+            newsContainer.setAttribute('data-source', sourceId);
+            super.getResp(
+                {
+                    endpoint: 'everything',
+                    options: {
+                        sources: sourceId,
+                    },
+                },
+                callback
+            );
+        }
+        return;
     }
 }
 
