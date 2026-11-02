@@ -36,5 +36,8 @@ export interface ArticlesList {
 }
 
 export type Options = Record<string, string>;
+export type ReqOptions = {
+  apiKey: string;
+} & Options;
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';

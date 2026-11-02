@@ -1,10 +1,10 @@
-import { type Options, type ArticlesList, type SourcesList, type HttpMethod } from '../../types';
+import { type Options, type ReqOptions, type ArticlesList, type SourcesList, type HttpMethod } from '../../types';
 
 class Loader {
   public baseLink: string;
-  public options: Options;
+  public options: ReqOptions;
 
-  constructor(baseLink: string, options: Options) {
+  constructor(baseLink: string, options: ReqOptions) {
     this.baseLink = baseLink;
     this.options = options;
   }
