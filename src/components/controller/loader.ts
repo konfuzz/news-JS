@@ -1,4 +1,4 @@
-import { type Options, type ArticlesList, type SourcesList } from '../../types';
+import { type Options, type ArticlesList, type SourcesList, type HttpMethod } from '../../types';
 
 class Loader {
   public baseLink: string;
@@ -43,7 +43,7 @@ class Loader {
   }
 
   private load<T>(
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    method: HttpMethod,
     endpoint: string,
     callback: (data: T) => void,
     options: Options = {},
