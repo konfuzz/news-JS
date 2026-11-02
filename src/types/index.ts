@@ -13,9 +13,8 @@ export interface SourcesList {
   sources: SourceItem[];
 }
 
-export interface ArticleSource {
+export interface ArticleSource extends Pick<SourceItem, 'name'> {
   id: string | null;
-  name: string;
 }
 
 export interface Article {
@@ -44,5 +43,15 @@ export type Options = Record<string, string>;
 export type ReqOptions = {
   apiKey: string;
 } & Options;
+
+export type RequestParams = Partial<{
+  category: string;
+  language: string;
+  country: string;
+  sources: string;
+  q: string;
+  pageSize: string;
+  page: string;
+}>;
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';

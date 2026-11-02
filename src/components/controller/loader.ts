@@ -1,8 +1,16 @@
-import { type Options, type ReqOptions, type ArticlesList, type SourcesList, type HttpMethod, type Endpoints } from '../../types';
+import {
+  type Options,
+  type ReqOptions,
+  type RequestParams,
+  type ArticlesList,
+  type SourcesList,
+  type HttpMethod,
+  type Endpoints,
+} from '../../types';
 
 class Loader {
-  public baseLink: string;
-  public options: ReqOptions;
+  public readonly baseLink: string;
+  public readonly options: ReqOptions;
 
   constructor(baseLink: string, options: ReqOptions) {
     this.baseLink = baseLink;
@@ -10,7 +18,7 @@ class Loader {
   }
 
   protected getResp<T extends ArticlesList | SourcesList>(
-    { endpoint, options = {} }: { endpoint: Endpoints; options?: Options },
+    { endpoint, options = {} }: { endpoint: Endpoints; options?: RequestParams },
     callback = (data: T): void => {
       if (!data) {
         console.error('No callback for GET response');
@@ -31,8 +39,8 @@ class Loader {
     return res;
   }
 
-  private makeUrl(options: Options, endpoint: Endpoints): string {
-    const urlOptions: Options = { ...this.options, ...options };
+  private makeUrl(options: RequestParams, endpoint: Endpoints): string {
+    const urlOptions: Options & RequestParams = { ...this.options, ...options };
     let url = `${this.baseLink}${endpoint}?`;
 
     Object.keys(urlOptions).forEach((key) => {
@@ -46,7 +54,7 @@ class Loader {
     method: HttpMethod,
     endpoint: Endpoints,
     callback: (data: T) => void,
-    options: Options = {},
+    options: RequestParams = {},
   ): void {
     fetch(this.makeUrl(options, endpoint), { method })
       .then((res) => this.errorHandler(res))
